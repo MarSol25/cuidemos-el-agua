@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="style.css">
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+         <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+         rel="stylesheet">
+         <title>Cuidemos el agua</title>
+    </head>
+
+    <body>
+
+        <div class="movil-menu">
+            <div class="menu-toggle" id="menu-toggle">
+                <img src="images/logo.png" alt="">
+                &#9776;
+            </div>
+            <nav class="mobile-menu" id="mobile-menu">
+                <div class="close-btn" id="close-btn">&times;</div>
+                <ul>
+                    <a href="index.html">inicio</a>
+                    <a href="qsomos.html">quienes somos</a>
+                    <a href="costa.html">consumo rural costa</a>
+                    <a href="sierra.html">consumo rural sierra</a>
+                    <a href="selva.html">consumo rural selva</a>
+                    <a href="urbana.html">consumo urbano</a>
+                </ul>
+            </nav>
+        </div>
+
+        <header>
+            <div class="header-container container">
+                <div class="header-img">
+                    <img src="images/logo.png" alt="">
+                </div>
+                <div class="header-nav">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="qsomos.html">Quienes Somos</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="costa.html">Consumo Rural Costa</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="sierra.html">Consumo Rural Sierra</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="selva.html">Consumo Rural Selva</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="urbana.html">Consumo Urbano</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="conoce-us" id="conoce">
+          <video autoplay muted loop class="video-fondobt">
+            <source src="images/bt.mp4" type="video/mp4">
+          </video>
+            <div class="oscurecer"></div>
+               
+            <div class="conoce-desc">
+                <div class="conoce-container">
+                    <h1>
+                        Proteger el agua comienza con pequeños gestos que transforman el mañana
+                    </h1>
+                </div>
+            </div> 
+        </section>
+
+        <script>
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const closeBtn = document.getElementById("close-btn");
+
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.add("show");
+            });
+
+            closeBtn.addEventListener("click", () => {
+                mobileMenu.classList.remove("show");
+            });
+        </script>
+
+    </body>
+
+</html>

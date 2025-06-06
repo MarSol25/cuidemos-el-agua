@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="style.css">
+         <link rel="preconnect" href="https://fonts.googleapis.com">
+         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+         <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+         rel="stylesheet">
+         <title>Cuidemos el agua</title>
+    </head>
+
+    <body>
+
+        <div class="movil-menu">
+            <div class="menu-toggle" id="menu-toggle">
+                <img src="images/logo.png" alt="">
+                &#9776;
+            </div>
+            <nav class="mobile-menu" id="mobile-menu">
+                <div class="close-btn" id="close-btn">&times;</div>
+                <ul>
+                    <a href="index.html">inicio</a>
+                    <a href="qsomos.html">quienes somos</a>
+                    <a href="costa.html">consumo rural costa</a>
+                    <a href="sierra.html">consumo rural sierra</a>
+                    <a href="selva.html">consumo rural selva</a>
+                    <a href="urbana.html">consumo urbano</a>
+                </ul>
+            </nav>
+        </div>
+
+
+        <header>
+            <div class="header-container container">
+                <div class="header-img">
+                    <img src="images/logo.png" alt="">
+                </div>
+                <div class="header-nav">
+                    <nav>
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="qsomos.html">Quienes Somos</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="costa.html">Consumo Rural Costa</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="sierra.html">Consumo Rural Sierra</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="selva.html">Consumo Rural Selva</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="urbana.html">Consumo Urbano</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="selva" id="selva">
+            <div class="selva-container">
+                <h2>Consumo Rural selva</h2>
+
+                <form id="consumoSelvaForm" onsubmit="enviarCalculo(event)">
+                    <div style="display: flex; gap: 50px; width: 100%;">
+                        <input type="number" id="consumoM3Selva" placeholder="Consumo (m³)" required>
+                        <input type="number" id="habitantesSelva" placeholder="N° de habitantes por familia" required>
+                    </div>
+
+                    <div style="display: flex; gap: 50px; width: 100%; display: none;">
+                        <input type="number" id="consumoPersonaSelva" placeholder="Consumo por persona (lt)">
+                        <input type="number" id="consumoLtSelva" placeholder="Consumo (lt)" readonly>
+                    </div>
+
+                    <div style="display: flex; gap: 50px; width: 100%; display: none;">
+                        <input type="number" id="consumoDiarioSelva" placeholder="Consumo diario (lt)" readonly>
+                        <input type="number" id="dotacionSelva" value="100" placeholder="Dotación (lt/hab/día)" readonly>
+                    </div>
+
+                    <div style="display: flex; gap: 50px; width: 100%;">
+                        <input style="width: 100%;" type="month" id="consumoMesSelva">
+                    </div>
+
+                    <button type="submit">Calcular</button>
+                </form>   
+            </div>
+        </section>
+
+        <script>
+            const input2 = document.getElementById("consumoMesSelva");
+
+            input2.addEventListener("change", () => {
+                const fecha = new Date(input2.value + "-01"); // Completa el día
+                const opciones = { year: 'numeric', month: 'long' };
+                const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
+                console.log("Mes seleccionado:", fechaFormateada); // Ejemplo: "abril 2025"
+            });
+        </script>
+    
+        <script>
+            function enviarCalculo(event) {
+                event.preventDefault(); // evita recargar la página
+
+                const consumoM3 = parseFloat(document.getElementById("consumoM3Selva").value);
+                const habitantes = parseInt(document.getElementById("habitantesSelva").value);
+                const mesSeleccionado = document.getElementById("consumoMesSelva").value;
+                const dotacionFija = parseFloat(document.getElementById("dotacionSelva").value);
+
+                if (!isNaN(consumoM3) && !isNaN(habitantes) && habitantes > 0 && mesSeleccionado) {
+                    const [anio, mes] = mesSeleccionado.split("-").map(Number);
+                    const diasMes = new Date(anio, mes, 0).getDate();
+
+                    const consumoLt = consumoM3 * 1000;
+                    const dotacionCalculada = consumoLt / (habitantes * diasMes);
+
+                    // Redireccionar a resultado.html con los datos en la URL
+                    const params = new URLSearchParams({
+                        dotacionCalculada: dotacionCalculada.toFixed(),
+                        dotacionFija: dotacionFija,
+                        mes: mesSeleccionado
+                    });
+                    window.location.href = `res-selva.html?${params.toString()}`;
+                } else {
+                    alert("Por favor, completa todos los campos correctamente.");
+                }
+            }
+        </script>
+
+        <script>
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const closeBtn = document.getElementById("close-btn");
+
+            menuToggle.addEventListener("click", () => {
+                mobileMenu.classList.add("show");
+            });
+
+            closeBtn.addEventListener("click", () => {
+                mobileMenu.classList.remove("show");
+            });
+        </script>
+
+    </body>
+
+</html>
